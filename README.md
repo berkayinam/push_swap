@@ -1,5 +1,6 @@
 # push_swap
-push swap basittir
-github aç bas ittir
+push swap basittir\n
+github aç bas ittir '\n'
 admin geldi
+
 hass si.
