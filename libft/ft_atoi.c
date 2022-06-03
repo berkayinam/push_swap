@@ -3,38 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binam <42istanbul.com.tr>                  +#+  +:+       +#+        */
+/*   By: esoylu <42istanbul.com.tr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 13:10:39 by binam             #+#    #+#             */
-/*   Updated: 2022/03/17 12:58:32 by binam            ###   ########.fr       */
+/*   Created: 2021/12/16 19:46:07 by esoylu            #+#    #+#             */
+/*   Updated: 2022/02/20 18:05:23 by esoylu           ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
 long	ft_atoi(const char *str)
 {
-	long int	num;
-	int			n;
+	int		i;
+	long	mult;
+	long	res;
 
-	n = 1;
-	num = 0;
-	while ((*str >= 9 && *str <= 13) || (*str == 32))
-		str++;
-	if (*str == '-' || *str == '+')
+	mult = 1;
+	res = 0;
+	i = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+		if (str[i++] == '-')
+			mult = -1;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (*str == '-')
-			n = -1;
-		str++;
-	}
-	while (*str != 0 && *str >= '0' && *str <= '9')
-	{
-		num = num * 10 + (*str - '0') * n;
-		if (num > 2147483647)
+		res *= 10;
+		res += str[i] - '0';
+		if (res * mult > 2147483647)
 			return (2147483648);
-		if (num < -2147483648)
+		if (res * mult < -2147483648)
 			return (-2147483649);
-		str++;
+		i++;
 	}
-	return (num);
+	return (res * mult);
 }

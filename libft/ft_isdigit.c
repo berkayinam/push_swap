@@ -3,27 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binam <42istanbul.com.tr>                  +#+  +:+       +#+        */
+/*   By: esoylu <42istanbul.com.tr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 12:05:17 by binam             #+#    #+#             */
-/*   Updated: 2022/03/15 11:18:22 by binam            ###   ########.fr       */
+/*   Created: 2022/01/09 19:26:51 by esoylu            #+#    #+#             */
+/*   Updated: 2022/01/09 19:42:42 by esoylu           ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	ft_isdigit(char *str)
+int	ft_isdigit(int c)
 {
-	int	i;
-
-	i = 0;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	if (!str[i])
+	if (c < '0' || c > '9')
 		return (0);
-	while (str[i] && str[i] >= '0' && str[i] <= '9')
-		i++;
-	if (ft_atoi(str) == 2147483648 || ft_atoi(str) == -2147483649)
-		return (0);
-	return (str[i] == '\0');
+	return (1);
 }

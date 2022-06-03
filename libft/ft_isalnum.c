@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binam <42istanbul.com.tr>                  +#+  +:+       +#+        */
+/*   By: esoylu <42istanbul.com.tr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/04 12:17:51 by binam             #+#    #+#             */
-/*   Updated: 2022/03/14 17:02:05 by binam            ###   ########.fr       */
+/*   Created: 2022/01/09 19:29:09 by esoylu            #+#    #+#             */
+/*   Updated: 2022/01/09 19:42:17 by esoylu           ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_isalnum(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	return (0);
 }

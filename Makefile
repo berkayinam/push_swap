@@ -1,43 +1,32 @@
-SRCS = src/get_map_and_check.c src/take_image.c src/main.c src/game_finish.c\
-	   src/msg_error.c src/key_events.c src/put_image_to_window.c
+NAME	=	push_swap
+MAIN	=	main.c
+SRCS	=	push_swap_funcs.c short_sort.c utils.c push_swap_utils.c check_nums.c init.c
+OBJS	=	$(MAIN:.c=.o) $(SRCS:.c=.o)
+CHECKER_OBJS	=	$(SRCS:.c=.o)
+CFLAGS	=	-Wall -Wextra -Werror
 
-SRCS_BONUS = bonus/write_screen.c
+all: $(NAME)
 
-SRCS_MAND  = src/write_screen.c
+%.o: %.c
+	gcc -c $< -o $@ $(CFLAGS)
 
-OBJS_BONUS = $(SRCS_BONUS:.c=.o)
+$(NAME): $(OBJS)
+	gcc $(CFLAGS) libft/libft.a -o $(NAME) $(OBJS)
 
-OBJS = $(SRCS:.c=.o)
+checker: fclean $(CHECKER_OBJS)
+	 gcc $(CFLAGS) $(SRCS) checker.c libft/libft.a -o checker
 
-CC = @gcc
+bonus:	checker
 
-MFLAGS =  ./libft/libft.a ./mlx/libmlx.a ./ft_printf/libftprintf.a ./get_next_line/get_next_line.a
+clean:
+	rm -rf $(NAME).a
 
-CFLAGS = -Wall -Wextra -Werror -I./mlx -I./libft -I./ft_printf
+fclean: clean
+	rm -rf $(NAME).a $(OBJS)
+	rm -rf push_swap
+	rm -rf checker
+	rm -rf checker.o
 
-RM = @rm -rf
+re: fclean all
 
-NAME = push_swap
-
-all : $(NAME)
-
-$(NAME): $(OBJS) $(SRCS_MAND:.c=.o)
-	make -C ./libft
-	make -C ./ft_printf
-	make -C ./get_next_line
-	$(CC) $(OBJS) $(SRCS_MAND:.c=.o) $(MFLAGS) $(CFLAGS) $(NAME)
-
-fclean : clean
-	$(RM) ./libft/*.a
-	$(RM) ./src/*.a
-	$(RM) ./ft_printf/*.a
-	$(RM) $(NAME)
-
-clean :
-	$(RM) ./libft/*.o
-	$(RM) ./src/*.o
-	$(RM) ./ft_printf/*.o
-
-re : fclean all
-
-.PHONY : all fclean clean re
+.PHONY: all, clean, fclean, re, checker

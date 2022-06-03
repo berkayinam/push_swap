@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: binam <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: esoylu <42istanbul.com.tr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 17:28:46 by binam             #+#    #+#             */
-/*   Updated: 2022/03/16 17:28:48 by binam            ###   ########.fr       */
+/*   Created: 2022/01/10 05:45:33 by esoylu            #+#    #+#             */
+/*   Updated: 2022/01/10 06:28:31 by esoylu           ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_putstr(char *str)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	int	i;
-
-	if (!str)
-		return ;
-	i = -1;
-	while (str[++i])
-		write(1, &str[i], 1);
+	del(lst->content);
+	free(lst);
 }
