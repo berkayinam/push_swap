@@ -1,115 +1,76 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: binam <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/24 19:26:25 by binam             #+#    #+#             */
+/*   Updated: 2022/10/24 19:26:27 by binam            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "push_swap.h"
 
-int	get_min_ind(t_stack *a)
+void	swap(t_data *stack)
 {
-	int	j;
-	int	i;
-	int	min;
-
-	if (!a->size)
-		return (0);
-	min = INT_MAX;
-	i = -1;
-	j = 0;
-	while (++i < a->size)
-	{
-		if (a->arr[i] < min)
-		{
-			min = a->arr[i];
-			j = i;
-		}
-	}
-	return (j);
-}
-
-int	get_pos(t_stack *a, int num)
-{
-	int	j;
-	int	i;
-	int	max;
 	int	tmp;
 
-	if (!a->size)
-		return (1);
-	max = INT_MIN;
-	j = -1;
-	i = -1;
-	while (++i < a->size)
-	{
-		tmp = num - a->arr[i];
-		if (tmp < 0 && tmp > max)
-		{
-			j = i;
-			max = tmp;
-		}
-	}
-	if (j == -1)
-		j = get_min_ind(a);
-	return (j);
-}
-
-void	find_least_process(t_stack *a, t_stack *b, int *i, int *j)
-{
-	int	tmp[2];
-	int	m;
-	int	n;
-	int	min;
-
-	min = INT_MAX;
-	m = b->size;
-	while (--m >= 0)
-	{
-		n = get_pos(a, b->arr[m]);
-		if (m + 1 > b->size - m - 1)
-			tmp[0] = b->size - m - 1;
-		else
-			tmp[0] = m + 1;
-		if (n > a->size - n)
-			tmp[1] = a->size - n;
-		else
-			tmp[1] = n;
-		if (tmp[0] + tmp[1] < min)
-		{
-			min = tmp[0] + tmp[1];
-			*i = m;
-			*j = n;
-		}
-	}
-}
-
-void	get_to_top(t_stack *s, int i)
-{
-	int	counter;
-
-	if (i + 1 > s->size - i - 1)
-	{
-		counter = s->size - i - 1;
-		while (counter-- > 0)
-			rotate(s, 0);
-	}
+	if (stack->size < 2)
+		return ;
+	tmp = stack->array[stack->size - 1];
+	stack->array[stack->size - 1] = stack->array[stack->size - 2];
+	stack->array[stack->size - 2] = tmp;
+	if (stack->type == 'a')
+		write(1, "sa\n", 3);
 	else
-	{
-		counter = i + 1;
-		while (counter-- > 0)
-			rev_rotate(s, 0);
-	}
+		write(1, "sb\n", 3);
 }
 
-int	mid(t_stack *s, int length)
+void	push(t_data *from, t_data *to)
 {
-	int		i;
-	long	min;
-	long	max;
+	if (from->size < 1)
+		return ;
+	to->array[to->size] = from->array[from->size - 1];
+	to->size++;
+	from->size--;
+	if (from->type == 'a')
+		write(1, "pb\n", 3);
+	else
+		write(1, "pa\n", 3);
+}
 
-	i = 0;
-	min = INT_MAX;
-	max = INT_MIN;
-	while (i++ < length)
-	{
-		if (s->arr[s->size - i] > max)
-			max = s->arr[s->size - i];
-		if (s->arr[s->size - i] < min)
-			min = s->arr[s->size - i];
-	}
-	return ((max + min) / 2);
+void	rotate(t_data *stack)
+{
+	int	i;
+	int	tmp;
+
+	if (stack->size < 2)
+		return ;
+	tmp = stack->array[stack->size - 1];
+	i = -1;
+	while (++i < stack->size -1)
+		stack->array[stack->size - i - 1] = stack->array[stack->size - i - 2];
+	stack->array[0] = tmp;
+	if (stack->type == 'a')
+		write(1, "ra\n", 3);
+	else
+		write(1, "rb\n", 3);
+}
+
+void	rev_rotate(t_data *stack)
+{
+	int	i;
+	int	tmp;
+
+	if (stack->size < 2)
+		return ;
+	tmp = stack->array[0];
+	i = -1;
+	while (++i < stack->size - 1)
+		stack->array[i] = stack->array[i + 1];
+	stack->array[stack->size - 1] = tmp;
+	if (stack->type == 'a')
+		write(1, "rra\n", 4);
+	else
+		write(1, "rrb\n", 4);
 }

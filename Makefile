@@ -1,32 +1,21 @@
-NAME	=	push_swap
-MAIN	=	main.c
-SRCS	=	push_swap_funcs.c short_sort.c utils.c push_swap_utils.c check_nums.c init.c
-OBJS	=	$(MAIN:.c=.o) $(SRCS:.c=.o)
-CHECKER_OBJS	=	$(SRCS:.c=.o)
-CFLAGS	=	-Wall -Wextra -Werror
+NAME = push_swap
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
+RM = rm -rf
+
+SRC = main.c assing_to_stack.c libft_func.c error.c check.c indexing.c push_swap_utils.c sort_smaller_list.c sort_list.c
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
+$(NAME): $(OBJ)
+		$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.c
-	gcc -c $< -o $@ $(CFLAGS)
+clean:	
+		$(RM) $(OBJ)
 
-$(NAME): $(OBJS)
-	gcc $(CFLAGS) libft/libft.a -o $(NAME) $(OBJS)
+fclean:	clean
+		$(RM) $(NAME)
 
-checker: fclean $(CHECKER_OBJS)
-	 gcc $(CFLAGS) $(SRCS) checker.c libft/libft.a -o checker
+re:	fclean all
 
-bonus:	checker
-
-clean:
-	rm -rf $(NAME).a
-
-fclean: clean
-	rm -rf $(NAME).a $(OBJS)
-	rm -rf push_swap
-	rm -rf checker
-	rm -rf checker.o
-
-re: fclean all
-
-.PHONY: all, clean, fclean, re, checker
+.PHONY: all clean fclean re

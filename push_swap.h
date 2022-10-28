@@ -1,44 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: binam <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/24 19:25:46 by binam             #+#    #+#             */
+/*   Updated: 2022/10/24 19:25:48 by binam            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/libft.h"
+# include <string.h>
 
-typedef struct stack
+typedef struct s_data
 {
-	int		*arr;
+	int		*array;
 	int		size;
 	char	type;
-	int		max_size;
-}	t_stack;
+}	t_data;
 
-void	short_sort(t_stack *a, t_stack *b);
-int		get_min_ind(t_stack *a);
-int		get_pos(t_stack *a, int num);
-int		mid(t_stack *s, int length);
-void	get_to_top(t_stack *s, int i);
-void	find_least_process(t_stack *a, t_stack *b, int *i, int *j);
-void	push(t_stack *from, t_stack *to, int checker);
-void	rotate(t_stack *s, int checker);
-void	rev_rotate(t_stack *s, int checker);
-void	swap(t_stack *s, int checker);
-void	init_stack(t_stack *stack, int size, char type);
-void	init_a(t_stack *from, t_stack *to, int chunk_size);
-void	simplify(int *arr, int size);
-void	sort(int *arr, int size);
-int		check_nums(int argc, char **args, int checker);
-int		sorted(t_stack *a);
-void	rec(t_stack *a, t_stack *b);
-int		err(int checker);
-int		is_valid(char *str);
-int		do_process(char *call, t_stack *a, t_stack *b);
-void	ft_putnbr(int num);
-int		ft_strcmp(char *s1, char *s2);
-int		check_nums_2(int argc, char **args, int checker);
+size_t	number_size(char const *av);
+char	*substrr(char const *s, unsigned int start, size_t len);
+int		atoii(const char *av, t_data *a_stack, t_data *b_stack);
+size_t	splitt(char *av, t_data *a, t_data *b, size_t a_i);
+size_t	ft_strlen(const char *s);
+void	assign_to_stack(int ac, char **av, t_data *a_stack, t_data *b_stack);
+void	check_repeat(t_data *a, t_data *b);
+void	check_in_line(t_data *a, t_data *b);
+int		check_in_line2(t_data *a);
+void	ft_sort(int *sort, t_data *a);
+void	indexing(t_data *a);
+void	swap(t_data *stack);
+void	push(t_data *from, t_data *to);
+void	rotate(t_data *stack);
+void	rev_rotate(t_data *stack);
+void	triple_list(t_data *a);
+void	quartet_list(t_data *a, t_data *b);
+void	quintuple_list(t_data *a, t_data *b);
+void	sort_smaller_list(t_data *a, t_data *b);
+int		bit_count(t_data *a_stack);
+void	sort_list_b(t_data *a, t_data *b, int bit, int bit_size);
+void	bitwise_a(t_data *a, t_data *b, int bit);
+void	sort_list(t_data *a, t_data *b);
+void	error_mes(t_data *a, t_data *b);
 
-# define SUCCESS 0
-# define ERROR 1
-# define INT_MIN -2147483648
-# define INT_MAX 2147483647
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t size);
+
 #endif

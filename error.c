@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: esoylu <42istanbul.com.tr>                 +#+  +:+       +#+        */
+/*   By: binam <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/09 19:29:09 by esoylu            #+#    #+#             */
-/*   Updated: 2022/01/09 19:42:17 by esoylu           ###   ########.tr       */
+/*   Created: 2022/10/24 19:25:23 by binam             #+#    #+#             */
+/*   Updated: 2022/10/24 19:25:26 by binam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "push_swap.h"
 
-#include "libft.h"
-
-int	ft_isalnum(int c)
+void	error_mes(t_data *a, t_data *b)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	return (0);
+	write(1, "Error", 5);
+	free(a->array);
+	free(b->array);
+	exit(0);
 }
